@@ -86,7 +86,7 @@ jobs:
     name: Deploy to Hosting
     needs:
       - changed-files
-      - build
+      - nuxt-build
     if: ${{ needs.changed-files.outputs.hosting }}
     runs-on: ubuntu-latest
     permissions:
