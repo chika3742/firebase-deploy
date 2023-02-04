@@ -71,7 +71,7 @@ jobs:
           FCM_VAPID_KEY: ${{ secrets.fcm-vapid-key }}
 
       - name: Zip artifact
-        run: zip -qq -r ~/artifact.zip ${{ nuxt-output-path }}
+        run: zip -qq -r ~/artifact.zip ${{ inputs.nuxt-output-path }}
 
       - uses: actions/upload-artifact@v3
         with:
