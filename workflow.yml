@@ -63,21 +63,24 @@ jobs:
 
       - name: yarn install
         run: yarn install --frozen-lockfile
+        working-directory: ${{ inputs.nuxt-build-path }}
 
       - name: Build
         run: yarn generate
+        working-directory: ${{ inputs.nuxt-build-path }}
         env:
           NODE_OPTIONS: "--max_old_space_size=5120"
           FCM_VAPID_KEY: ${{ secrets.fcm-vapid-key }}
 
       - name: Zip artifact
-        run: zip -qq -r artifact.zip dist/
+        working-directory: ${{ inputs.nuxt-build-path }}
+        run: zip -qq -r ~/artifact.zip dist/
 
       - uses: actions/upload-artifact@v3
         with:
           name: nuxt-generated
           path: |
-            artifact.zip
+            ~/artifact.zip
 
   deploy-hosting:
     name: Deploy to Hosting
