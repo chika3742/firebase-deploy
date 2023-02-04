@@ -1,4 +1,4 @@
-## Firebase Deploy Workflow
+# Firebase Deploy Workflow
 
 Builds Nuxt app and deploy to Firebase Hosting and Firebase Cloud Functions
 
