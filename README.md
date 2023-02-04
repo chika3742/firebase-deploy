@@ -21,13 +21,13 @@ jobs:
 
 ### Inputs
 
-| key                        | required | description                           |
-|----------------------------|----------|---------------------------------------|
-| nuxt-build-path            | No       | Path to the nuxt source to build      |
-| functions-path             | No       | Path to the functions to deploy       |
-| workload-identity-provider | Yes      | ID of the workload identity provider  |
-| service-account            | Yes      | Service account to use when deploying |
-| workload-identity-audience | Yes      | Audience of the workload identity     |
+| key                        | required                  | description                           |
+|----------------------------|---------------------------|---------------------------------------|
+| nuxt-build-path            | No (default: "")          | Path to the nuxt source to build      |
+| functions-path             | No (default: "functions") | Path to the functions to deploy       |
+| workload-identity-provider | Yes                       | ID of the workload identity provider  |
+| service-account            | Yes                       | Service account to use when deploying |
+| workload-identity-audience | Yes                       | Audience of the workload identity     |
 
 ### Secrets
 
