@@ -12,7 +12,7 @@
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value="workflow.yml" />
+                    <option name="path" value=".github/workflows/deploy.yml" />
                   </Item>
                 </list>
               </option>

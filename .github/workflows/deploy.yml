@@ -1,10 +1,10 @@
 on:
   workflow_call:
     inputs:
-      nuxt-build-path:
+      nuxt-output-path:
         type: string
-        default: ""
-        description: Path to the nuxt source to build
+        default: ".output/public"
+        description: Output path of nuxt generate.
       functions-path:
         type: string
         default: functions
@@ -63,18 +63,15 @@ jobs:
 
       - name: yarn install
         run: yarn install --frozen-lockfile
-        working-directory: ${{ inputs.nuxt-build-path }}
 
       - name: Build
         run: yarn generate
-        working-directory: ${{ inputs.nuxt-build-path }}
         env:
           NODE_OPTIONS: "--max_old_space_size=5120"
           FCM_VAPID_KEY: ${{ secrets.fcm-vapid-key }}
 
       - name: Zip artifact
-        working-directory: ${{ inputs.nuxt-build-path }}
-        run: zip -qq -r ~/artifact.zip dist/
+        run: zip -qq -r ~/artifact.zip ${{ nuxt-output-path }}
 
       - uses: actions/upload-artifact@v3
         with:
@@ -96,11 +93,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: yarn
-
       - uses: actions/download-artifact@v3
         with:
           name: nuxt-generated
@@ -109,7 +101,7 @@ jobs:
         run: unzip artifact.zip
 
       - name: Install Firebase CLI
-        run: yarn global add firebase-tools
+        run: curl -sL firebase.tools | bash
 
       - name: 'Authenticate to Google Cloud'
         id: auth
@@ -151,7 +143,7 @@ jobs:
           cd functions && yarn install --frozen-lockfile
 
       - name: Install Firebase CLI
-        run: yarn global add firebase-tools
+        run: curl -sL firebase.tools | bash
 
       - name: 'Authenticate to Google Cloud'
         id: auth

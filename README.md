@@ -1,17 +1,15 @@
 # Firebase Deploy Workflow
 
-Builds Nuxt app and deploy to Firebase Hosting and Firebase Cloud Functions
+Nuxt 3アプリをSSGビルドし、Firebase Hosting / Firebase Cloud Functionsにデプロイするワークフローです。
 
-## Usage
+## 使用方法
 
 ```yaml
 jobs:
   deploy:
     name: Deploy
-    uses: chika3742/firebase-deploy/workflow.yml@main
+    uses: chika3742/firebase-deploy/.github/workflows/deploy.yml@main
     with:
-      # nuxt-build-path: 
-      # functions-path: 
       workload-identity-provider: 
       service-account: 
       workload-identity-audience: 
@@ -19,15 +17,17 @@ jobs:
       fcm-vapid-key: 
 ```
 
+※`firebase.json`は、レポジトリのルートに存在する必要があります。
+
 ### Inputs
 
-| key                        | required                  | description                           |
-|----------------------------|---------------------------|---------------------------------------|
-| nuxt-build-path            | No (default: "")          | Path to the nuxt source to build      |
-| functions-path             | No (default: "functions") | Path to the functions to deploy       |
-| workload-identity-provider | Yes                       | ID of the workload identity provider  |
-| service-account            | Yes                       | Service account to use when deploying |
-| workload-identity-audience | Yes                       | Audience of the workload identity     |
+| key                        | required                       | description                           |
+|----------------------------|--------------------------------|---------------------------------------|
+| nuxt-output-path           | No (default: ".output/public") | Output path of nuxt generate.         |
+| functions-path             | No (default: "functions")      | Path to the functions to deploy       |
+| workload-identity-provider | Yes                            | ID of the workload identity provider  |
+| service-account            | Yes                            | Service account to use when deploying |
+| workload-identity-audience | Yes                            | Audience of the workload identity     |
 
 ### Secrets
 
