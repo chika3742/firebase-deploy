@@ -26,6 +26,8 @@ on:
         required: true
         description: Audience of the workload identity
     secrets:
+      test:
+        required: false
       env:
         required: false
         description: Environment variables to pass to the build process
@@ -73,7 +75,7 @@ jobs:
           if [ "${{ secrets.env }}" != "" ]; then
             export "${{ secrets.env }}"
           fi
-          echo "$CTF_SPACE_ID"
+          echo "${{ secrets.TEST }}"
           yarn generate
         env:
           NODE_OPTIONS: "--max_old_space_size=5120"
