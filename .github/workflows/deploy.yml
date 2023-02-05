@@ -71,7 +71,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        uses: ./.github/actions/build.yml
+        uses: ./.github/actions/build
 
       - name: Zip artifact
         run: zip -qq -r ~/artifact.zip ${{ inputs.nuxt-output-path }}
