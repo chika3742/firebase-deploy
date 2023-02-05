@@ -114,7 +114,7 @@ jobs:
       - name: Deploy to Firebase Hosting
         run: firebase deploy --only hosting
 
-      - uses: geekyeggo/delete-artifact@v1
+      - uses: geekyeggo/delete-artifact@v2
         with:
           name: nuxt-generated
 
