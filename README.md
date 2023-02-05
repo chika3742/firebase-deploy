@@ -21,7 +21,9 @@ jobs:
       service-account: 
       workload-identity-audience: 
     secrets:
-      fcm-vapid-key: 
+      env: |
+        HOGE=${{ secrets.HOGE }}
+        PIYO=${{ secrets.PIYO }}
 ```
 
 ※`firebase.json`は、レポジトリのルートに存在する必要があります。
@@ -39,6 +41,6 @@ jobs:
 
 ### Secrets
 
-| key           | required | description                                      |
-|---------------|----------|--------------------------------------------------|
-| fcm-vapid-key | No       | (if used) VAPID Key for Firebase Cloud Messaging |
+| key | required | description                                        |
+|-----|----------|----------------------------------------------------|
+| env | No       | Environment variables to pass to the build process |
