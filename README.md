@@ -32,6 +32,7 @@ jobs:
 |----------------------------|--------------------------------|---------------------------------------|
 | nuxt-output-path           | No (default: ".output/public") | Output path of nuxt generate.         |
 | functions-path             | No (default: "functions")      | Path to the functions to deploy       |
+| node-version               | No (default: "18")             | Node.js version                       |
 | workload-identity-provider | Yes                            | ID of the workload identity provider  |
 | service-account            | Yes                            | Service account to use when deploying |
 | workload-identity-audience | Yes                            | Audience of the workload identity     |
