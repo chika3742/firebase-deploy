@@ -20,10 +20,6 @@ jobs:
       workload-identity-provider: 
       service-account: 
       workload-identity-audience: 
-    secrets:
-      env: |
-        HOGE=${{ secrets.HOGE }}
-        PIYO=${{ secrets.PIYO }}
 ```
 
 ※`firebase.json`は、レポジトリのルートに存在する必要があります。
@@ -38,9 +34,3 @@ jobs:
 | workload-identity-provider | Yes                            | ID of the workload identity provider  |
 | service-account            | Yes                            | Service account to use when deploying |
 | workload-identity-audience | Yes                            | Audience of the workload identity     |
-
-### Secrets
-
-| key | required | description                                        |
-|-----|----------|----------------------------------------------------|
-| env | No       | Environment variables to pass to the build process |

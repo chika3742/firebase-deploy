@@ -25,12 +25,6 @@ on:
         type: string
         required: true
         description: Audience of the workload identity
-    secrets:
-      test:
-        required: false
-      env:
-        required: false
-        description: Environment variables to pass to the build process
 
 jobs:
   changed-files:
