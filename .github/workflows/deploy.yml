@@ -70,8 +70,8 @@ jobs:
 
       - name: Build
         run: |
-          if [ ${{ secrets.env }} != "" ]; then
-            export ${{ secrets.env }}
+          if [ "${{ secrets.env }}" != "" ]; then
+            export "${{ secrets.env }}"
           fi
           yarn generate
         env:
