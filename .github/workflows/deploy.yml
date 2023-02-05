@@ -71,14 +71,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: |
-          if [ "${{ secrets.env }}" != "" ]; then
-            export "${{ secrets.env }}"
-          fi
-          echo "${{ secrets.TEST }}"
-          yarn generate
-        env:
-          NODE_OPTIONS: "--max_old_space_size=5120"
+        uses: ./.github/actions/build.yml
 
       - name: Zip artifact
         run: zip -qq -r ~/artifact.zip ${{ inputs.nuxt-output-path }}
