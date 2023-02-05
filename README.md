@@ -17,10 +17,11 @@ jobs:
     name: Deploy
     uses: chika3742/firebase-deploy/.github/workflows/deploy.yml@main
     with:
-      build-action: # e.g. chika3742/chikachnet4/.github/actions/build.yml
       workload-identity-provider: 
       service-account: 
       workload-identity-audience: 
+    secrets:
+      fcm-vapid-key: 
 ```
 
 ※`firebase.json`は、レポジトリのルートに存在する必要があります。
@@ -29,10 +30,15 @@ jobs:
 
 | key                        | required                       | description                           |
 |----------------------------|--------------------------------|---------------------------------------|
-| build-output-path          | No (default: ".output/public") | Output path of nuxt generate.         |
-| build-action               | Yes                            | Nuxt build action (see above)         |
+| nuxt-output-path           | No (default: ".output/public") | Output path of nuxt generate.         |
 | functions-path             | No (default: "functions")      | Path to the functions to deploy       |
 | node-version               | No (default: "18")             | Node.js version                       |
 | workload-identity-provider | Yes                            | ID of the workload identity provider  |
 | service-account            | Yes                            | Service account to use when deploying |
 | workload-identity-audience | Yes                            | Audience of the workload identity     |
+
+### Secrets
+
+| key           | required | description                                      |
+|---------------|----------|--------------------------------------------------|
+| fcm-vapid-key | No       | (if used) VAPID Key for Firebase Cloud Messaging |

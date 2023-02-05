@@ -1,14 +1,10 @@
 on:
   workflow_call:
     inputs:
-      build-output-path:
+      nuxt-output-path:
         type: string
         default: ".output/public"
         description: Output path of nuxt generate.
-      build-action:
-        type: string
-        required: true
-        description: Nuxt build action
       functions-path:
         type: string
         default: functions
@@ -29,6 +25,10 @@ on:
         type: string
         required: true
         description: Audience of the workload identity
+    secrets:
+      fcm-vapid-key:
+        required: false
+        description: (if used) VAPID Key for Firebase Cloud Messaging
 
 jobs:
   changed-files:
@@ -69,10 +69,13 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        uses: ${{ inputs.build-action }}
+        run: yarn generate
+        env:
+          NODE_OPTIONS: "--max_old_space_size=5120"
+          FCM_VAPID_KEY: ${{ secrets.fcm-vapid-key }}
 
       - name: Zip artifact
-        run: zip -qq -r ~/artifact.zip ${{ inputs.build-output-path }}
+        run: zip -qq -r ~/artifact.zip ${{ inputs.nuxt-output-path }}
 
       - uses: actions/upload-artifact@v3
         with:
