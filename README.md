@@ -2,6 +2,13 @@
 
 Nuxt 3アプリをSSGビルドし、Firebase Hosting / Firebase Cloud Functionsにデプロイするワークフローです。
 
+## 動作について
+
+- Firebase CLIの認証は、Workload Identity 連携を使用して行います。
+- `functions-path`以下のディレクトリに変更があった際は、Functionsのデプロイを実行します。
+- `functions-path`以下のディレクトリ以外に変更があった際は、Nuxtのデプロイを実行します。
+- GitHubのページから手動実行した際は両方のデプロイを実行します。
+
 ## 使用方法
 
 ```yaml
