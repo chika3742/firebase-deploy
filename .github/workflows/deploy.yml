@@ -99,7 +99,7 @@ jobs:
         run: unzip artifact.zip
 
       - name: Install Firebase CLI
-        run: curl -sL firebase.tools | bash
+        run: yarn global add firebase-tools
 
       - name: 'Authenticate to Google Cloud'
         id: auth
@@ -141,7 +141,7 @@ jobs:
           cd functions && yarn install --frozen-lockfile
 
       - name: Install Firebase CLI
-        run: curl -sL firebase.tools | bash
+        run: yarn global add firebase-tools
 
       - name: 'Authenticate to Google Cloud'
         id: auth
