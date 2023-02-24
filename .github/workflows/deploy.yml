@@ -66,6 +66,7 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: yarn
+          cache-dependency-path: ${{ inputs.nuxt-src-path }}/yarn.lock
 
       - name: yarn install
         run: yarn install --frozen-lockfile
