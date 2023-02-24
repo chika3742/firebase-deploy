@@ -9,6 +9,10 @@ on:
         type: string
         default: functions
         description: Path to the functions to deploy
+      nuxt-src-path:
+        type: string
+        default: "~"
+        description: Path to the nuxt src
       node-version:
         type: string
         default: 18
@@ -53,6 +57,7 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || needs.changed-files.outputs.hosting == 'true' }}
     runs-on: ubuntu-latest
 
+
     steps:
       - uses: actions/checkout@v3
 
@@ -63,13 +68,15 @@ jobs:
 
       - name: yarn install
         run: yarn install --frozen-lockfile
+        working-directory: ${{ inputs.nuxt-src-path }}
 
       - name: Build
         run: NODE_OPTIONS="--max_old_space_size=5120" yarn generate
         env: ${{ secrets }}
+        working-directory: ${{ inputs.nuxt-src-path }}
 
       - name: Zip artifact
-        run: zip -qq -r ~/artifact.zip ${{ inputs.nuxt-output-path }}
+        run: zip -qq -r ~/artifact.zip "${{ inputs.nuxt-src-path }}/${{ inputs.nuxt-output-path }}"
 
       - uses: actions/upload-artifact@v3
         with:

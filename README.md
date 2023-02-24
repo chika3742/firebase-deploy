@@ -29,6 +29,7 @@ jobs:
 | key                        | required                       | description                           |
 |----------------------------|--------------------------------|---------------------------------------|
 | nuxt-output-path           | No (default: ".output/public") | Output path of nuxt generate.         |
+| nuxt-src-path              | No (default: "~")              | Path to the nuxt src                  |
 | functions-path             | No (default: "functions")      | Path to the functions to deploy       |
 | node-version               | No (default: "18")             | Node.js version                       |
 | workload-identity-provider | Yes                            | ID of the workload identity provider  |
