@@ -47,6 +47,7 @@ jobs:
         id: changed-functions-files
         uses: tj-actions/changed-files@v35
         with:
+          since_last_remote_commit: true
           files: |
             ${{ inputs.functions-path }}/**
 
@@ -105,7 +106,7 @@ jobs:
         run: unzip artifact.zip
 
       - name: Install Firebase CLI
-        run: curl -sL firebase.tools | bash
+        run: yarn global add firebase-tools
 
       - name: 'Authenticate to Google Cloud'
         id: auth
@@ -147,7 +148,7 @@ jobs:
           cd functions && yarn install --frozen-lockfile
 
       - name: Install Firebase CLI
-        run: curl -sL firebase.tools | bash
+        run: yarn global add firebase-tools
 
       - name: 'Authenticate to Google Cloud'
         id: auth
