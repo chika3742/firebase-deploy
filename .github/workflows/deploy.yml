@@ -11,7 +11,7 @@ on:
         description: Path to the functions to deploy
       nuxt-src-path:
         type: string
-        default: "~"
+        default: "."
         description: Path to the nuxt src
       node-version:
         type: string
