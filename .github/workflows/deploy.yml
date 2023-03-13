@@ -55,9 +55,8 @@ jobs:
     name: Nuxt Build
     needs:
       - changed-files
-    if: ${{ github.event_name == 'workflow_dispatch' || needs.changed-files.outputs.hosting == 'true' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch' || needs.changed-files.outputs.hosting == 'true' }}
     runs-on: ubuntu-latest
-
 
     steps:
       - uses: actions/checkout@v3
@@ -129,7 +128,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - changed-files
-    if: ${{ github.event_name == 'workflow_dispatch' || needs.changed-files.outputs.functions == 'true' }}
+    if: ${{ github.event_name != 'repository_dispatch' && ( github.event_name == 'workflow_dispatch' || needs.changed-files.outputs.functions == 'true' ) }}
     permissions:
       contents: read
       id-token: write
