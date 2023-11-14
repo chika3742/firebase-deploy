@@ -27,12 +27,13 @@ jobs:
 
 ### Inputs
 
-| key                        | required                       | description                           |
-|----------------------------|--------------------------------|---------------------------------------|
-| nuxt-output-path           | No (default: ".output/public") | Output path of nuxt generate.         |
-| nuxt-src-path              | No (default: ".")              | Path to the nuxt src                  |
-| functions-path             | No (default: "functions")      | Path to the functions to deploy       |
-| node-version               | No (default: "18")             | Node.js version                       |
-| workload-identity-provider | Yes                            | ID of the workload identity provider  |
-| service-account            | Yes                            | Service account to use when deploying |
-| workload-identity-audience | Yes                            | Audience of the workload identity     |
+| key                        | required                       | description                                 |
+|----------------------------|--------------------------------|---------------------------------------------|
+| nuxt-output-path           | No (default: ".output/public") | Output path of nuxt generate.               |
+| nuxt-src-path              | No (default: ".")              | Path to the nuxt src                        |
+| nuxt-pm                    | No (default: "yarn")           | Package manager to use for nuxt (yarn\|bun) |
+| functions-path             | No (default: "functions")      | Path to the functions to deploy             |
+| node-version               | No (default: "20")             | Node.js version                             |
+| workload-identity-provider | Yes                            | ID of the workload identity provider        |
+| service-account            | Yes                            | Service account to use when deploying       |
+| workload-identity-audience | Yes                            | Audience of the workload identity           |

@@ -13,6 +13,10 @@ on:
         type: string
         default: "."
         description: Path to the nuxt src
+      nuxt-pm:
+        type: string
+        description: Package manager to use for nuxt (yarn|bun)
+        default: yarn
       node-version:
         type: string
         default: 20
@@ -61,14 +65,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - if: ${{ !contains(fromJSON('["yarn", "bun"]'), inputs.nuxt-pm) }}
+        run: |
+          printf "\e[31mInvalid nuxt-pm: ${{ inputs.nuxt-pm }}\e[m\n"
+          exit 1
+
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
-          cache: yarn
+          cache: ${{ inputs.nuxt-pm == 'yarn' && 'yarn' || '' }}
           cache-dependency-path: ${{ inputs.nuxt-src-path }}/yarn.lock
 
-      - name: yarn install
-        run: yarn install --frozen-lockfile
+      - if: ${{ inputs.nuxt-pm == 'bun' }}
+        uses: oven-sh/setup-bun@v1
+
+      - name: (yarn|bun) install
+        run: ${{ inputs.nuxt-pm }} install --frozen-lockfile
         working-directory: ${{ inputs.nuxt-src-path }}
 
       - name: Build
