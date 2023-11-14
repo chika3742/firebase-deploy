@@ -39,13 +39,13 @@ jobs:
       functions: ${{ steps.changed-functions-files.outputs.any_changed == 'true' }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Get Changed Files Under Functions
         id: changed-functions-files
-        uses: tj-actions/changed-files@v35
+        uses: tj-actions/changed-files@v40
         with:
           since_last_remote_commit: true
           files: |
@@ -59,9 +59,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
           cache: yarn
@@ -96,7 +96,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v3
         with:
@@ -110,7 +110,7 @@ jobs:
 
       - name: 'Authenticate to Google Cloud'
         id: auth
-        uses: 'google-github-actions/auth@v0'
+        uses: google-github-actions/auth@v1
         with:
           workload_identity_provider: ${{ inputs.workload-identity-provider }}
           service_account: ${{ inputs.service-account }}
@@ -134,9 +134,9 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
           cache: yarn
@@ -152,7 +152,7 @@ jobs:
 
       - name: 'Authenticate to Google Cloud'
         id: auth
-        uses: 'google-github-actions/auth@v0'
+        uses: google-github-actions/auth@v1
         with:
           workload_identity_provider: ${{ inputs.workload-identity-provider }}
           service_account: ${{ inputs.service-account }}
