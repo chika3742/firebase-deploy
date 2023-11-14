@@ -65,7 +65,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - if: ${{ !contains(fromJSON('["yarn", "bun"]'), inputs.nuxt-pm) }}
+      - name: Check nuxt-pm input
+        if: ${{ !contains(fromJSON('["yarn", "bun"]'), inputs.nuxt-pm) }}
         run: |
           printf "\e[31mInvalid nuxt-pm: ${{ inputs.nuxt-pm }}\e[m\n"
           exit 1
@@ -79,7 +80,7 @@ jobs:
       - if: ${{ inputs.nuxt-pm == 'bun' }}
         uses: oven-sh/setup-bun@v1
 
-      - name: (yarn|bun) install
+      - name: Install Dependencies
         run: ${{ inputs.nuxt-pm }} install --frozen-lockfile
         working-directory: ${{ inputs.nuxt-src-path }}
 
