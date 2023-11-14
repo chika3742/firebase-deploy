@@ -1,3 +1,7 @@
+# ⚠️DEPRECATION NOTICE
+
+本リポジトリは今後メンテナンスを行いません。利用はお控えください。
+
 # Firebase Deploy Workflow
 
 Nuxt 3アプリをSSGビルドし、Firebase Hosting / Firebase Cloud Functionsにデプロイするワークフローです。
