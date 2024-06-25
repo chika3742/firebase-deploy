@@ -9,6 +9,10 @@ on:
         type: string
         default: functions
         description: Path to the functions to deploy
+      functions-deploy-cmd:
+        type: string
+        default: firebase deploy --only functions
+        description: Command to deploy functions
       nuxt-src-path:
         type: string
         default: "."
@@ -83,7 +87,7 @@ jobs:
         uses: oven-sh/setup-bun@v1
 
       - name: Install Dependencies
-        run: ${{ inputs.nuxt-pm }} install --frozen-lockfile
+        run: ${{ inputs.nuxt-pm }} install
         working-directory: ${{ inputs.nuxt-src-path }}
 
       - name: Build
@@ -163,8 +167,8 @@ jobs:
 
       - name: yarn install
         run: |
-          yarn install --frozen-lockfile
-          cd functions && yarn install --frozen-lockfile
+          yarn install
+          cd functions && yarn install
 
       - name: Install Firebase CLI
         run: curl -sL https://firebase.tools | bash
@@ -178,7 +182,7 @@ jobs:
           audience: ${{ inputs.workload-identity-audience }}
 
       - name: Deploy to Cloud Functions
-        run: firebase deploy --only functions
+        run: ${{ inputs.functions-deploy-cmd }}
 
 concurrency:
   group: ${{ github.ref }}
