@@ -98,7 +98,7 @@ jobs:
       - name: Zip artifact
         run: zip -qq -r ~/artifact.zip "${{ inputs.nuxt-src-path }}/${{ inputs.nuxt-output-path }}"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: nuxt-generated
           path: |
@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: nuxt-generated
 
@@ -131,7 +131,7 @@ jobs:
 
       - name: 'Authenticate to Google Cloud'
         id: auth
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ inputs.workload-identity-provider }}
           service_account: ${{ inputs.service-account }}
@@ -175,7 +175,7 @@ jobs:
 
       - name: 'Authenticate to Google Cloud'
         id: auth
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ inputs.workload-identity-provider }}
           service_account: ${{ inputs.service-account }}
