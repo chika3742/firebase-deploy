@@ -120,6 +120,8 @@ jobs:
       - name: Unzip artifact
         run: unzip artifact.zip
 
+      - run: corepack enable
+
       - name: Install Firebase CLI
         run: yarn global add firebase-tools
 
@@ -150,6 +152,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - run: corepack enable
 
       - uses: actions/setup-node@v4
         with:
