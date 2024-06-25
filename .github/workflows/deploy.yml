@@ -123,7 +123,7 @@ jobs:
       - run: corepack enable
 
       - name: Install Firebase CLI
-        run: yarn global add firebase-tools
+        run: curl -sL https://firebase.tools | bash
 
       - name: 'Authenticate to Google Cloud'
         id: auth
@@ -167,7 +167,7 @@ jobs:
           cd functions && yarn install --frozen-lockfile
 
       - name: Install Firebase CLI
-        run: yarn global add firebase-tools
+        run: curl -sL https://firebase.tools | bash
 
       - name: 'Authenticate to Google Cloud'
         id: auth
