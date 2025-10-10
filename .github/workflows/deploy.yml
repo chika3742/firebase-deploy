@@ -17,10 +17,6 @@ on:
         type: string
         default: "."
         description: Path to the nuxt src
-      nuxt-pm:
-        type: string
-        description: Package manager to use for nuxt (yarn|bun)
-        default: yarn
       node-version:
         type: string
         default: 22
@@ -69,26 +65,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check nuxt-pm input
-        if: ${{ !contains(fromJSON('["yarn", "bun"]'), inputs.nuxt-pm) }}
-        run: |
-          printf "\e[31mInvalid nuxt-pm: ${{ inputs.nuxt-pm }}\e[m\n"
-          exit 1
-
       - run: corepack enable
 
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
-          cache: ${{ inputs.nuxt-pm == 'yarn' && 'yarn' || '' }}
-          cache-dependency-path: ${{ inputs.nuxt-src-path }}/yarn.lock
 
-      - if: ${{ inputs.nuxt-pm == 'bun' }}
-        uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v1
+
+      - uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          path: node_modules
 
       - name: Install Dependencies
-        run: ${{ inputs.nuxt-pm }} install
-        working-directory: ${{ inputs.nuxt-src-path }}
+        run: bun install
 
       - name: Build
         run: NODE_OPTIONS="--max_old_space_size=5120" yarn generate
@@ -124,8 +115,6 @@ jobs:
       - name: Unzip artifact
         run: unzip artifact.zip
 
-      - run: corepack enable
-
       - name: Install Firebase CLI
         run: curl -sL https://firebase.tools | bash
 
@@ -157,18 +146,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: corepack enable
+      - uses: oven-sh/setup-bun@v1
 
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
-          cache: yarn
-          cache-dependency-path: "**/yarn.lock"
 
-      - name: yarn install
-        run: |
-          yarn install
-          cd functions && yarn install
+      - uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          path: node_modules
+
+      - name: Install Dependencies
+        run: bun install
 
       - name: Install Firebase CLI
         run: curl -sL https://firebase.tools | bash
