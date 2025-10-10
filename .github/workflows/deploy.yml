@@ -23,7 +23,7 @@ on:
         default: yarn
       node-version:
         type: string
-        default: 20
+        default: 22
         description: Node.js version
       workload-identity-provider:
         type: string
