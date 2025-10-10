@@ -2,6 +2,8 @@
 
 Nuxt 3アプリをSSGビルドし、Firebase Hosting / Firebase Cloud Functionsにデプロイするワークフローです。
 
+※パッケージマネージャーはBunにのみ対応しており、workspaceが設定されている前提です。
+
 ## 動作について
 
 - Firebase CLIの認証は、Workload Identity 連携を使用して行います。
@@ -16,7 +18,7 @@ Nuxt 3アプリをSSGビルドし、Firebase Hosting / Firebase Cloud Functions�
 jobs:
   deploy:
     name: Deploy
-    uses: chika3742/firebase-deploy/.github/workflows/deploy.yml@main
+    uses: chika3742/firebase-deploy/.github/workflows/deploy.yml@v2
     with:
       workload-identity-provider: 
       service-account: 
@@ -31,10 +33,9 @@ jobs:
 |----------------------------|--------------------------------------------------|---------------------------------------------|
 | nuxt-output-path           | No (default: ".output/public")                   | Output path of nuxt generate.               |
 | nuxt-src-path              | No (default: ".")                                | Path to the nuxt src                        |
-| nuxt-pm                    | No (default: "yarn")                             | Package manager to use for nuxt (yarn\|bun) |
 | functions-path             | No (default: "functions")                        | Path to the functions to deploy             |
 | functions-deploy-cmd       | No (default: "firebase deploy --only functions") | Command to deploy functions                 |
-| node-version               | No (default: "20")                               | Node.js version                             |
+| node-version               | No (default: "22")                               | Node.js version                             |
 | workload-identity-provider | Yes                                              | ID of the workload identity provider        |
 | service-account            | Yes                                              | Service account to use when deploying       |
 | workload-identity-audience | Yes                                              | Audience of the workload identity           |
